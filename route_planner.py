@@ -2,16 +2,14 @@ from googlemaps import Client
 import json
 import datetime
 import config
-from operator import methodcaller
 
-#possible_bus_routes = [] #contains a list of BUS_ROUTE objects containing information about the primary bus route from origin to desitination
 #creates client to make requests from google maps api, documentation: https://googlemaps.github.io/google-maps-services-python/docs/#module-googlemaps
 gmaps = Client(key=config.gmaps_api_key)
 
 # accepts an orgin and destination as array of coordinates
 # searches for through the bus routes via google maps directions api
 # creates a bus route object for the primary(farthest distance) leg of each route
-# adds the bus route objects to a global list
+# adds the bus route objects to a set and returns the set
 def get_primary_bus_routes(origin, destination) :
   directions_results = gmaps.directions(origin, destination, mode = 'transit', arrival_time = datetime.datetime(2018, 12, 18, 10, 30), transit_routing_preference = 'fewer_transfers', alternatives = True)
   possible_bus_routes = set()
@@ -27,6 +25,7 @@ def get_primary_bus_routes(origin, destination) :
           farthest_step_value = direction_step_distance
     possible_bus_routes.add(Bus_Route(farthest_step, origin, destination)) # ALSO DON'T add if they have the same departure stop & route number value
   return possible_bus_routes
+
 '''
 # accepts a location as an array of coordinates or string of address
 # accepts radius to search for in miles
@@ -46,9 +45,10 @@ def get_nearby_bustops(location, radius):
 def return_coordinates(address):
     geocode_result = gmaps.geocode(address) # auto converts from json to list of dictoinaries
     return [geocode_result[0].get('geometry').get('location').get('lat'), geocode_result[0].get('geometry').get('location').get('lng')]
-'''
+
 def convert_miles_to_meters(miles):
   return miles * 1609.344
+'''
 
 # creates a new bus route with inputted transit_details
 class Bus_Route :
@@ -95,15 +95,7 @@ class Bus_Route :
   
 #returns a list of the routes from fasest to slowest total commute time (driving + transit)
 def fastest_route(departure_address, arrival_address):
-  possible_bus_routes = get_primary_bus_routes(departure_address, arrival_address)
-  
+  possible_bus_routes = get_primary_bus_routes(departure_address, arrival_address) #set to make sure there are no duplicate routes
   sorted_list = sorted(list(possible_bus_routes), key= lambda x: x.get_total_commute_time())
   # print(json.dumps(possible_bus_routes[0].driving_directions_to_departure_stop))
   return sorted_list
-  '''('The fastest commuting method from ' + sorted_list[0].origin_address + ' to ' + sorted_list[0].destination_address + ' is to drive to ' + sorted_list[0].departure_stop_name
-  + ' and then take bus route number ' + sorted_list[0].route_number + ' at ' + sorted_list[0].departure_time + ' to ' + sorted_list[0].arrival_stop_name
-  + ' at ' + sorted_list[0].arrival_time + '\n The total commute time is ' + str((datetime.timedelta(seconds=sorted_list[0].get_total_commute_time()))))
-'''
-#fastest_route('***REMOVED***', '***REMOVED***')
-# ***REMOVED***
-# ***REMOVED***
