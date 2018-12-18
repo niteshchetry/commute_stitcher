@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div id = "content">
+        <form method="POST">
+            Origin Address: <input name="origin"> <br>
+            Destination Address: <input name="destination"> <br>
+            <!--desired arrival time: <input name="arrival time" placeholder = "00:00 AM on 12/31/2018"> <br>-->
+            <input type="submit" value = "Stitch!">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+body{
+    background: url(tactile_noise.png);
+    font-family: 'Open Sans', sans-serif;
+    color: whitesmoke;
+}
+
+#container {
+    margin-top: 25px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#header {
+    text-align: center;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+#content{
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 25px;
+    font-weight: 300;
+    font-size: larger;
+}
