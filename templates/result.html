@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+    <div id = "content">
+        <p>Origin Address : {{ordered_routes[0].origin_address}}</p>
+        <p>Destination Address : {{ordered_routes[0].destination_address}}</p>
+        {% for route in ordered_routes %}
+            <br>
+            <h2> Route {{loop.index}} </h2>
+            <ul>
+                <li>drive for {{route.readable_driving_time}} to bus stop at {{route.departure_stop_name}}</li>
+                <li>catch bus {{route.route_number}} at {{route.departure_time}}</li>
+                <li>arrive at {{route.arrival_stop_name}} at {{route.arrival_time}}</li>
+                <li>walk for {{route.readable_walking_time}} from {{route.arrival_stop_name}} to {{route.destination_address}}</li>
+                <li>the total commute time is {{route.readable_commute_time}}</li>
+            </ul>
+        {% endfor %}    
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> "Commute Stitcher" </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='style.css') }}" /> 
+    <style>
+            #map {
+              height: 500px;
+              margin-top: 100px;
+              margin-left: 300px;
+              margin-right: 300px;
+            }
+            html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+            }
+          </style>
+</head>
+<body>
+    <div id = "container">
+        <div id = "header">
+            <h1>Commute Stitcher</h1>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+    <div id = container"> </div>
+        <div id="map"></div>
+    </div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 47.6205, lng: -122.3493},
+          zoom: 9
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{gmaps_api_key}}&callback=initMap"
+    async defer></script>
+</body>
+</html>
