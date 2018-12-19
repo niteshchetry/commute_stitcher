@@ -4,6 +4,7 @@
     <div id = "content">
         <p>Origin Address : {{ordered_routes[0].origin_address}}</p>
         <p>Destination Address : {{ordered_routes[0].destination_address}}</p>
+        <p>Desired Arrival Time: {{ordered_routes[0].desired_arrival_time}}</p>
         {% for route in ordered_routes %}
             <br>
             <h2> Route {{loop.index}} </h2>
