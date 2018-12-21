@@ -11,7 +11,7 @@ gmaps = Client(key=config.gmaps_api_key)
 # creates a bus route object for the primary(farthest distance) leg of each route
 # adds the bus route objects to a set and returns the set
 def get_primary_bus_routes(origin, destination, arrival_date_time) :
-  directions_results = gmaps.directions(origin, destination, mode = 'transit', arrival_time = convert_string_to_datetime(arrival_date_time), transit_routing_preference = 'fewer_transfers', alternatives = True)
+  directions_results = gmaps.directions(origin, destination, mode = 'transit', arrival_time = convert_string_to_datetime(arrival_date_time), transit_routing_preference = 'fewer_transfers', alternatives = True) 
   possible_bus_routes = set()
   for route in directions_results :
     direction_steps = route.get('legs')[0].get('steps') # json.dumps(json_object) removes of the 'u' before the python dict object version of the json
@@ -27,13 +27,14 @@ def get_primary_bus_routes(origin, destination, arrival_date_time) :
   return possible_bus_routes
 
 def convert_string_to_datetime(str_date_time):
-  #12, 19 2018 22:30
+  # format of input =  12, 19 2018 22:30
   month = int(str_date_time[:2])
   day = int(str_date_time[4:6])
-  year = int(str_date_time[8:11])
+  year = int(str_date_time[7:11])
   hour = int(str_date_time[12:14])
   minute = int(str_date_time[15:])
   return datetime.datetime(year, month, day, hour, minute)
+
 
 '''
 # accepts a location as an array of coordinates or string of address
