@@ -4,3 +4,4 @@ venv
 *.pyc
 replacements.txt
 .DS_Store
+package-lock.json
