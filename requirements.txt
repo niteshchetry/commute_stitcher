@@ -1,0 +1,5 @@
+Flask==1.0.2
+Werkzeug<0.13.0,>=0.12.0
+googlemaps
+requests
+requests-toolbelt
