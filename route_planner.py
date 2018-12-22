@@ -1,10 +1,10 @@
 from googlemaps import Client
 import json
 import datetime
-import config
+import os
 
 #creates client to make requests from google maps api, documentation: https://googlemaps.github.io/google-maps-services-python/docs/#module-googlemaps
-gmaps = Client(key=config.gmaps_api_key)
+gmaps = Client(key=os.environ.get('gmaps_api_key', None))
 
 # accepts an orgin and destination as array of coordinates
 # searches for through the bus routes via google maps directions api
