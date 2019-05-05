@@ -1,4 +1,4 @@
-# commute_stitcher
+# [https://commute-stitcher.herokuapp.com/] Commute Stitcher
 
 This application combines multiple forms of transport to determine the fastest way to commute to work or school. Currently, it combines driving, transit, and walking. 
 
